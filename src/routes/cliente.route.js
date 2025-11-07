@@ -11,14 +11,11 @@ import {
   listarFavoritosController,
   listarProdutosFavoritosController,
   removerFavoritoController,
+  allclienteController,
+  clienteIDController
 } from "../controllers/cliente.controller.js";
 
 const router = express.Router();
-
-/*  CLIENTE */
-router.post("/", cadastroController); // Criar cliente
-router.put("/:id", atualizarClienteController); // Atualizar cliente
-router.delete("/:id", removerClienteController); // Remover cliente
 
 /*  COMÉRCIO FAVORITOS */
 router.get("/comercio-favoritos", listarFavoritosController);
@@ -31,5 +28,12 @@ router.get("/produto-favoritos", listarProdutosFavoritosController);
 router.post("/produto-favoritos/:produtoId", adicionarProdutoFavoritoController);
 router.delete("/produto-favoritos/:produtoId", removerProdutoFavoritoController);
 router.get("/produto-favoritos/:produtoId/check", checkProdutoFavoritoController);
+
+/*  CLIENTE */
+router.post("/", cadastroController); // Criar cliente
+router.put("/:id", atualizarClienteController); // Atualizar cliente
+router.delete("/:id", removerClienteController); // Remover cliente
+router.get("/", allclienteController); // Listar todos os clientes
+router.get("/:id", clienteIDController); // Listar cliente por ID
 
 export default router;

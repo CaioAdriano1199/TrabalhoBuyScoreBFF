@@ -1,14 +1,16 @@
-import { atualizarClienteService } from "../services/cliente.service.js";
-import { CadastroService } from "../services/cliente.service.js";
-import { checkFavoritoService } from "../services/cliente.service.js";
-import { checkProdutoFavoritoService } from "../services/cliente.service.js";
-import { removerClienteService } from "../services/cliente.service.js";
-import { removerProdutoFavoritoService } from "../services/cliente.service.js";
-import { adicionarFavoritoService } from "../services/cliente.service.js";
-import { adicionarProdutoFavoritoService } from "../services/cliente.service.js";
-import { listarFavoritosService } from "../services/cliente.service.js";
-import { listarProdutosFavoritosService } from "../services/cliente.service.js";
-import { removerFavoritoService } from "../services/cliente.service.js";
+import { atualizarClienteService,
+  CadastroService,
+  checkFavoritoService,
+  checkProdutoFavoritoService,
+  removerClienteService,
+  removerProdutoFavoritoService,
+  adicionarFavoritoService,
+  adicionarProdutoFavoritoService,
+  listarFavoritosService,
+  listarProdutosFavoritosService,
+  removerFavoritoService,
+  allclienteService,
+  clienteIDService  } from "../services/cliente.service.js";
 
 export const atualizarClienteController = async (req, res) => {
   const { id } = req.params;
@@ -41,50 +43,50 @@ export const atualizarClienteController = async (req, res) => {
 };
 
 export const cadastroController = async (req, res) => {
-    const {
-        perfilUsuario,
-        nome,
-        email,
-        senha,
-        fotoUsuario,
-        cep,
-        logradouro,
-        complemento,
-        bairro,
-        cidade,
-        numero,
-        uf
-    } = req.body;
+  const {
+    perfilUsuario,
+    nome,
+    email,
+    senha,
+    fotoUsuario,
+    cep,
+    logradouro,
+    complemento,
+    bairro,
+    cidade,
+    numero,
+    uf
+  } = req.body;
 
-    if (!perfilUsuario ||
-        !nome ||
-        !email ||
-        !senha ||
-        !fotoUsuario ||
-        !cep ||
-        !logradouro ||
-        !complemento ||
-        !bairro ||
-        !cidade ||
-        numero === undefined ||
-        numero === null ||
-        !uf
-    ) {
-        return res.status(400).json({
-            sucesso: false,
-            mensagem: "Todos os campos são obrigatórios"
-        });
-    }
+  if (!perfilUsuario ||
+    !nome ||
+    !email ||
+    !senha ||
+    !fotoUsuario ||
+    !cep ||
+    !logradouro ||
+    !complemento ||
+    !bairro ||
+    !cidade ||
+    numero === undefined ||
+    numero === null ||
+    !uf
+  ) {
+    return res.status(400).json({
+      sucesso: false,
+      mensagem: "Todos os campos são obrigatórios"
+    });
+  }
 
-    try {
-        const data = await CadastroService(perfilUsuario, nome, email, senha, fotoUsuario, cep, logradouro, complemento, bairro, cidade, numero, uf);
-        res.json({ sucesso: true, ...data });
-    } catch (error) {
-        res.status(error.status || 500).json({
-            sucesso: false,
-            mensagem: error.mensagem || "Erro interno no BFF",
-        });
-    }
+  try {
+    const data = await CadastroService(perfilUsuario, nome, email, senha, fotoUsuario, cep, logradouro, complemento, bairro, cidade, numero, uf);
+    res.json({ sucesso: true, ...data });
+  } catch (error) {
+    res.status(error.status || 500).json({
+      sucesso: false,
+      mensagem: error.mensagem || "Erro interno no BFF",
+    });
+  }
 };
 
 export const checkFavoritoController = async (req, res) => {
@@ -300,3 +302,33 @@ export const removerFavoritoController = async (req, res) => {
   }
 };
 
+export const allclienteController = async (req, res) => {
+
+  try {
+    const data = await allclienteService();
+    res.json({ sucesso: true, ...data });
+  } catch (error) {
+    res.status(error.status || 500).json({
+      sucesso: false,
+      mensagem: error.mensagem || "Erro interno no BFF",
+    });
+  }
+};
+
+export const clienteIDController = async (req, res) => {
+  const { id } = req.params;
+
+  if (!id) {
+    return res.status(400).json({ sucesso: false, mensagem: "ID não fornecido" });
+  }
+
+  try {
+    const data = await clienteIDService(id);
+    res.json({ sucesso: true, ...data });
+  } catch (error) {
+    res.status(error.status || 500).json({
+      sucesso: false,
+      mensagem: error.mensagem || "Erro interno no BFF",
+    });
+  }
+};
