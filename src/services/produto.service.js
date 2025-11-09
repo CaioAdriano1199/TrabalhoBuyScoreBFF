@@ -119,7 +119,7 @@ export const criarProdutoService = async (body, token) => {
   try {
     const response = await axios.post(`${API_URL}`, body, {
       headers: {
-        Authorization: token,
+        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
     });

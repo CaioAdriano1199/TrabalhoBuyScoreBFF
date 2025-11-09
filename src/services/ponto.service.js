@@ -4,7 +4,7 @@ const API_URL = "http://localhost:8081/ponto";
 
 export const criarpontosService = async (pontos, token) => {
     try {
-        const response = await axios.post(`${API_URL}/criarponto`, { pontos }, { headers: { Authorization: token, "Content-Type": "application/json", }, });
+        const response = await axios.post(`${API_URL}/criarponto`, { pontos }, { headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json", }, });
 
         return {
             codigo: response.data
@@ -22,7 +22,7 @@ export const resgatarPontosPorCodigoService = async (codigo, token) => {
   try {
     const response = await axios.get(`${API_URL}/codigo/${codigo}`, {
       headers: {
-        Authorization: token,
+        Authorization: `Bearer ${token}`,
       },
     });
 

@@ -38,7 +38,7 @@ export const checkFavoritoService = async (comercioId, token) => {
       `${API_URL}/comercio-favoritos/${comercioId}/check`,
       {
         headers: {
-          Authorization: token,
+          Authorization: `Bearer ${token}`,
         },
       }
     );
@@ -62,7 +62,7 @@ export const checkProdutoFavoritoService = async (produtoId, token) => {
       `${API_URL}/produto-favoritos/${produtoId}/check`,
       {
         headers: {
-          Authorization: token,
+          Authorization: `Bearer ${token}`,
         },
       }
     );
@@ -98,7 +98,7 @@ export const removerProdutoFavoritoService = async (produtoId, token) => {
   try {
     await axios.delete(`${API_URL}/produto-favoritos/${produtoId}`, {
       headers: {
-        Authorization: token,
+        Authorization: `Bearer ${token}`,
       },
     });
   } catch (error) {
@@ -120,7 +120,7 @@ export const adicionarFavoritoService = async (comercioId, token) => {
       {},
       {
         headers: {
-          Authorization: token,
+          Authorization: `Bearer ${token}`,
         },
       }
     );
@@ -147,7 +147,7 @@ export const adicionarProdutoFavoritoService = async (produtoId, token) => {
       {},
       {
         headers: {
-          Authorization: token,
+          Authorization: `Bearer ${token}`,
         },
       }
     );
@@ -171,7 +171,7 @@ export const listarFavoritosService = async (token) => {
   try {
     const response = await axios.get(`${API_URL}/comercio-favoritos`, {
       headers: {
-        Authorization: token,
+        Authorization: `Bearer ${token}`,
       },
     });
 
@@ -192,7 +192,7 @@ export const listarProdutosFavoritosService = async (token) => {
   try {
     const response = await axios.get(`${API_URL}/produto-favoritos`, {
       headers: {
-        Authorization: token,
+        Authorization: `Bearer ${token}`,
       },
     });
 
@@ -213,7 +213,7 @@ export const removerFavoritoService = async (comercioId, token) => {
   try {
     await axios.delete(`${API_URL}/comercio-favoritos/${comercioId}`, {
       headers: {
-        Authorization: token,
+        Authorization: `Bearer ${token}`,
       },
     });
   } catch (error) {

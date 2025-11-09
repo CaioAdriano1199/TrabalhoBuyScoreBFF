@@ -93,7 +93,7 @@ export const buscarEnderecoPorCepService = async (cep) => {
   }
 
   try {
-    const response = await axios.post(`${API_URL}/cep`, { cep });
+    const response = await axios.post(`${API_URL}/cep`, cep);
     return response.data;
   } catch (error) {
     console.error("Erro ao chamar API:", error.message);
