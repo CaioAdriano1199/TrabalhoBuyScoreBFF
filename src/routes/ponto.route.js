@@ -1,8 +1,12 @@
 import express from "express";
-import { criarpontosController } from "../controllers/ponto.controllers.js";
+import { criarpontosController,
+            resgatarPontosPorCodigoController
+ } from "../controllers/ponto.controllers.js";
 
 const router = express.Router();
 
 router.post("/", criarpontosController);
+
+router.get("/codigo/:codigo", resgatarPontosPorCodigoController);
 
 export default router;

@@ -7,6 +7,7 @@ import {
     confirmarCompraService,
     cancelarCompraService,
     removerCompraService,
+    criarCompraService,
 } from "../services/compra.service.js";
 
 export const listarComprasController = async (req, res) => {
@@ -190,6 +191,39 @@ export const removerCompraController = async (req, res) => {
     await removerCompraService(id);
 
     return res.status(204).send(); // NoContent
+  } catch (error) {
+    return res.status(error.status || 500).json({
+      sucesso: false,
+      mensagem: error.mensagem || "Erro interno no BFF",
+    });
+  }
+};
+
+export const criarCompraController = async (req, res) => {
+  const token = req.headers.authorization;
+  const body = req.body;
+
+  if (!token) {
+    return res.status(401).json({
+      sucesso: false,
+      mensagem: "Token não fornecido",
+    });
+  }
+
+  if (!body || !body.produtoId || !body.quantidade) {
+    return res.status(400).json({
+      sucesso: false,
+      mensagem: "Dados inválidos. Envie produtoId e quantidade.",
+    });
+  }
+
+  try {
+    const compra = await criarCompraService(body, token);
+
+    return res.status(201).json({
+      sucesso: true,
+      compra,
+    });
   } catch (error) {
     return res.status(error.status || 500).json({
       sucesso: false,

@@ -8,6 +8,7 @@ import {
     confirmarCompraController,
     cancelarCompraController,
     removerCompraController,
+    criarCompraController
 } from "../controllers/compra.controller.js";
 
 const router = express.Router();
@@ -27,5 +28,7 @@ router.post("/confirmar", confirmarCompraController);
 router.post("/:id/cancelar", cancelarCompraController);
 
 router.delete("/:id", removerCompraController);
+
+router.post("/", criarCompraController);
 
 export default router;

@@ -128,3 +128,28 @@ export const removerCompraService = async (id) => {
     };
   }
 };
+
+export const criarCompraService = async (body, token) => {
+  try {
+    const response = await axios.post(
+      `${API_URL}`,
+      body,
+      {
+        headers: {
+          Authorization: token,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    return response.data;
+  } catch (error) {
+    console.error("Erro ao chamar API de compra:", error.message);
+
+    throw {
+      status: error.response?.status,
+      mensagem:
+        error.response?.data?.mensagem || "Erro na comunicação com API",
+    };
+  }
+};

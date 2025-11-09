@@ -4,7 +4,8 @@ import { produtoIDController,
     listarProdutosController, 
     ativarProdutoController,
     desativarProdutoController,
-    atualizarProdutoController
+    atualizarProdutoController,
+    criarProdutoController
  } from "../controllers/produto.controller.js";
 
 const router = express.Router();
@@ -20,5 +21,7 @@ router.put("/ativar/:id", ativarProdutoController);
 router.put("/desativar/:id", desativarProdutoController);
 
 router.put("/", atualizarProdutoController);
+
+router.post("/", criarProdutoController);
 
 export default router;

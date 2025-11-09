@@ -17,3 +17,46 @@ export const usuarioIDService = async (id) => {
     };
   }
 };
+
+export const listarUsuariosService = async (token) => {
+  try {
+    const response = await axios.get(`${API_URL}/all`, {
+      headers: {
+        Authorization: token,
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error("Erro ao chamar API de usuário:", error.message);
+
+    throw {
+      status: error.response?.status,
+      mensagem: error.response?.data?.mensagem || "Erro na comunicação com API",
+    };
+  }
+};
+
+export const criarUsuarioService = async (body) => {
+  try {
+    const response = await axios.post(
+      `${API_URL}`,
+      body,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    return response.data;
+  } catch (error) {
+    console.error("Erro ao chamar API de usuário:", error.message);
+
+    throw {
+      status: error.response?.status,
+      mensagem:
+        error.response?.data?.mensagem || "Erro na comunicação com API",
+    };
+  }
+};
