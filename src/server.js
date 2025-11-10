@@ -15,7 +15,7 @@ app.use(cors());
 
 app.use("/compra", compraRoutes);
 app.use("/ponto", pontoRoutes);
-app.use("/clientes", clienteRoutes);
+app.use("/cliente", clienteRoutes);
 app.use("/login", loginRoutes);
 app.use("/usuario", usuarioRoutes);
 app.use("/produto", produtoRoutes);
